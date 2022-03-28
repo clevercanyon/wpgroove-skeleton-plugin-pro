@@ -1,0 +1,51 @@
+{
+	"name"              : "clevercanyon/wpgroove-skeleton-plugin-pro",
+	"prefer-stable"     : true,
+	"minimum-stability" : "dev",
+	"config"            : {
+		"platform"      : {
+			"php" : "7.4.0"
+		},
+		"allow-plugins" : {
+			"dealerdirect/phpcodesniffer-composer-installer" : true,
+			"composer/package-versions-deprecated"           : true
+		}
+	},
+	"require-dev"       : {
+		"clevercanyon/wpgroove-framework-pro" : "dev-main",
+		"clevercanyon/wpgroove-framework-dev" : "dev-main"
+	},
+	"autoload-dev"      : {
+		"psr-4" : {
+			"Clever_Canyon\\Utilities\\Tests\\"       : [ "./vendor/clevercanyon/utilities/tests/classes" ],
+			"WP_Groove\\Framework\\Tests\\"           : [ "./vendor/clevercanyon/wpgroove-framework/tests/classes" ],
+			"WP_Groove\\Framework_Pro\\Tests\\"       : [ "./vendor/clevercanyon/wpgroove-framework-pro/tests/classes" ],
+			"WP_Groove\\Skeleton_Plugin_Pro\\Tests\\" : [ "./tests/classes" ]
+		}
+	},
+	"scripts"           : {
+		"compile"          : "./vendor/clevercanyon/wpgroove-framework/dev/cli-tools/composer/compile",
+		"post-install-cmd" : "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/clevercanyon/wpgroove-framework/dev/cli-tools/composer/on-post-install-cmd",
+		"post-update-cmd"  : "[ $COMPOSER_DEV_MODE -eq 0 ] || ./vendor/clevercanyon/wpgroove-framework/dev/cli-tools/composer/on-post-update-cmd"
+	},
+	"extra"             : {
+		"clevercanyon" : {
+			"$extends-packages" : [ "clevercanyon/wpgroove-framework-pro" ],
+			"&"                 : {
+				"project" : {
+					"data" : {
+						"version"        : "1.0.0",
+						"stable_tag"     : "1.0.0",
+
+						"layout"         : "wp-plugin",
+						"namespace_crux" : "WP_Groove\\Skeleton_Plugin_Pro",
+						"name"           : "{{name: Skeleton Plugin Pro}}"
+					}
+				},
+				"webpack" : {
+					"assetDirs" : [ "../../../trunk/src/assets" ]
+				}
+			}
+		}
+	}
+}
